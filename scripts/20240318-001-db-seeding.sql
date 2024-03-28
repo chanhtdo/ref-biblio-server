@@ -1,14 +1,19 @@
 CREATE TABLE IF NOT EXISTS authors (
-	author_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-	first_name TEXT,
+  author_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  first_name TEXT,
   middle_name TEXT,
   last_name TEXT,
   affiliations TEXT[],
   email TEXT,
-  research_fields TEXT[]
+  research_fields TEXT[],
+  created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  last_updated TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS labels (label TEXT PRIMARY KEY);
+CREATE TABLE IF NOT EXISTS labels (
+  label TEXT PRIMARY KEY,
+  created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 CREATE TABLE IF NOT EXISTS bibliographic_references (
   reference_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -16,7 +21,9 @@ CREATE TABLE IF NOT EXISTS bibliographic_references (
   description TEXT,
   review TEXT,
   year INT,
-  link TEXT
+  link TEXT,
+  created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  last_updated TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS bibliographic_references_authors (
