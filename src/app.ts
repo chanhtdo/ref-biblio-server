@@ -14,5 +14,5 @@ process.env.TZ = timezone;
 const envPort = process.env.PORT || port;
 
 app.listen(envPort, () => {
-  console.log(`[${timezone}] Queue api server ready at http://localhost:${envPort}`);
+  console.log(`[${timezone}] Ref-Biblio API server is ready at http://localhost:${envPort}`);
 });

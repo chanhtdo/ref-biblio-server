@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS authors (
   middle_name TEXT,
   last_name TEXT,
   affiliations TEXT[],
-  email TEXT,
+  email TEXT UNIQUE,
   research_fields TEXT[],
   created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   last_updated TIMESTAMP

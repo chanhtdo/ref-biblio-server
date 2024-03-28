@@ -1,0 +1,17 @@
+export enum ErrorType {
+  BadGateway = "BadGateway",
+  BadRequest = "BadRequest",
+  Conflict = "Conflict",
+  Forbidden = "Forbidden",
+  GatewayTimeOut = "GatewayTimeOut",
+  InternalServerError = "InternalServerError",
+  NotFound = "NotFound",
+  NotImplemented = "NotImplemented",
+  ResourceLocked = "ResourceLocked",
+  RequestTimeout = "RequestTimeout",
+  ServiceUnavailable = "ServiceUnavailable",
+  SomethingWentWrong = "SomethingWentWrong",
+  Unauthorized = "Unauthorized",
+  UnexpectedServerError = "UnexpectedServerError",
+  UnprocessableContent = "UnprocessableContent",
+}
