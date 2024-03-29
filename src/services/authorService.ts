@@ -2,6 +2,7 @@ import { pgdbAuthors } from "database";
 import { Author } from "ts/types/authors";
 import { GenericResponse } from "ts/types/genericResponse";
 import { genericErrorResponse } from "utils/genericErrorResponse";
+import { LogMessage } from "utils/logging";
 
 export async function add(author: Author): Promise<GenericResponse> {
   try {
@@ -15,6 +16,7 @@ export async function add(author: Author): Promise<GenericResponse> {
       },
     };
   } catch (error) {
+    LogMessage(error.message, "authorService.add", error);
     return genericErrorResponse(500, { details: error.message });
   }
 }
@@ -30,6 +32,7 @@ export async function modify(author: Author): Promise<GenericResponse> {
       },
     };
   } catch (error) {
+    LogMessage(error.message, "authorService.modify", error);
     return genericErrorResponse(500, { details: error.message });
   }
 }
