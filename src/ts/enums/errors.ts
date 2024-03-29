@@ -1,4 +1,5 @@
 export enum ErrorType {
+  AuthorNotFound = "AuthorNotFound",
   BadGateway = "BadGateway",
   BadRequest = "BadRequest",
   Conflict = "Conflict",

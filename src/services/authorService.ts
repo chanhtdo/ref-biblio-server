@@ -18,3 +18,18 @@ export async function add(author: Author): Promise<GenericResponse> {
     return genericErrorResponse(500, { details: error.message });
   }
 }
+
+export async function modify(author: Author): Promise<GenericResponse> {
+  try {
+    await pgdbAuthors.update(author);
+    return {
+      status: 200,
+      payload: {
+        timestamp: new Date(),
+        mesasage: `Author updated successfully.`,
+      },
+    };
+  } catch (error) {
+    return genericErrorResponse(500, { details: error.message });
+  }
+}

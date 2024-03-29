@@ -1,5 +1,7 @@
-import postAuthors from "./postAuthors";
+import postAuthor from "./postAuthor";
+import putAuthor from "./putAuthor";
 
 module.exports = {
-  "/api/v1/authors": { POST: { ...postAuthors } },
+  "/api/v1/authors": { POST: { ...postAuthor } },
+  "/api/v1/authors/:id": { PUT: { ...putAuthor } },
 };
