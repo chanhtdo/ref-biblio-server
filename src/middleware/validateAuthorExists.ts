@@ -1,4 +1,4 @@
-import { pgdbAuthors } from "database";
+import { pgAuthors } from "database";
 import { NextFunction, Response, Request } from "express";
 import { ErrorType } from "ts/enums/errors";
 import { LogMessage } from "utils/logging";
@@ -9,7 +9,8 @@ export async function validateAuthorExists(
   next: NextFunction,
 ): Promise<void> {
   try {
-    const authors = await pgdbAuthors.get([Number(req.params.id)]);
+    const authors = await pgAuthors.get([Number(req.params.id)]);
+
     if (authors.length > 0) return next();
 
     res.status(404).json({

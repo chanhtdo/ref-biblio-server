@@ -31,3 +31,7 @@ export async function get(authorIds: number[]): Promise<Author[]> {
   const query = `SELECT * FROM udf_get_authors($1)`;
   return pgPool.query(query, [authorIds]).then((res) => res.rows);
 }
+
+export async function remove(authorIds: number[]): Promise<void> {
+  await pgPool.query(`CALL usp_delete_authors($1)`, [authorIds]);
+}

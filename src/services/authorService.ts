@@ -1,4 +1,4 @@
-import { pgdbAuthors } from "database";
+import { pgAuthors } from "database";
 import { Author } from "ts/types/authors";
 import { GenericResponse } from "ts/types/genericResponse";
 import { genericErrorResponse } from "utils/genericErrorResponse";
@@ -6,7 +6,7 @@ import { LogMessage } from "utils/logging";
 
 export async function add(author: Author): Promise<GenericResponse> {
   try {
-    const { authorId, createdDate } = await pgdbAuthors.insert(author);
+    const { authorId, createdDate } = await pgAuthors.insert(author);
 
     return {
       status: 200,
@@ -23,7 +23,7 @@ export async function add(author: Author): Promise<GenericResponse> {
 
 export async function modify(author: Author): Promise<GenericResponse> {
   try {
-    await pgdbAuthors.update(author);
+    await pgAuthors.update(author);
     return {
       status: 200,
       payload: {
@@ -33,6 +33,22 @@ export async function modify(author: Author): Promise<GenericResponse> {
     };
   } catch (error) {
     LogMessage(error.message, "authorService.modify", error);
+    return genericErrorResponse(500, { details: error.message });
+  }
+}
+
+export async function remove(authorIds: number[]): Promise<GenericResponse> {
+  try {
+    await pgAuthors.remove(authorIds);
+    return {
+      status: 200,
+      payload: {
+        timestamp: new Date(),
+        mesasage: `Author(s) deleted successfully.`,
+      },
+    };
+  } catch (error) {
+    LogMessage(error.message, "authorService.remove", error);
     return genericErrorResponse(500, { details: error.message });
   }
 }

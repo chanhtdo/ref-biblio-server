@@ -13,6 +13,7 @@ export function LogMessage(
   const msg = new Intl.DateTimeFormat("default", dtFormat).format(new Date()) + ": ### Error ";
   console.log(chalk.red(msg) + message);
 
+  if (details) console.log(details);
   if (config.logs.enableLoggingType.includes(type)) {
     //Log message into database
     pgLogging.insertLogging(type, source, msg + message, details, config.logs.retentionDays);
