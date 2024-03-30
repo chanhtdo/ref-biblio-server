@@ -52,3 +52,16 @@ export async function remove(authorIds: number[]): Promise<GenericResponse> {
     return genericErrorResponse(500, { details: error.message });
   }
 }
+
+export async function get(authorId: number): Promise<GenericResponse> {
+  try {
+    const author = (await pgAuthors.get([authorId]))[0];
+    return {
+      status: 200,
+      payload: author,
+    };
+  } catch (error) {
+    LogMessage(error.message, "authorService.get", error);
+    return genericErrorResponse(500, { details: error.message });
+  }
+}

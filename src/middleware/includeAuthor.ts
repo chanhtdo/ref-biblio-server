@@ -1,17 +1,19 @@
-import { pgAuthors } from "database";
 import { NextFunction, Response, Request } from "express";
+import { authorService } from "services";
 import { ErrorType } from "ts/enums/errors";
 import { LogMessage } from "utils/logging";
 
-export async function validateAuthorExists(
+export async function includeAuthor(
   req: Request,
   res: Response,
   next: NextFunction,
 ): Promise<void> {
   try {
-    const authors = await pgAuthors.get([Number(req.params.id)]);
+    const { payload: author } = await authorService.get(Number(req.params.id));
 
-    if (authors.length > 0) return next();
+    //Include the author in the request object for later use
+    req.requestedAuthor = author;
+    if (author) return next();
 
     res.status(404).json({
       timestamp: new Date(),
