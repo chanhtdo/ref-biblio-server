@@ -9,11 +9,11 @@ export async function includeAuthor(
   next: NextFunction,
 ): Promise<void> {
   try {
-    const { payload: author } = await authorService.get(Number(req.params.id));
+    const { status, payload: author } = await authorService.get(Number(req.params.id));
 
     //Include the author in the request object for later use
     req.requestedAuthor = author;
-    if (author) return next();
+    if (status === 200 && author) return next();
 
     res.status(404).json({
       timestamp: new Date(),

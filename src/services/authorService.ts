@@ -55,7 +55,7 @@ export async function remove(authorIds: number[]): Promise<GenericResponse> {
 
 export async function get(authorId: number): Promise<GenericResponse> {
   try {
-    const author = (await pgAuthors.get([authorId]))[0];
+    const author = await pgAuthors.get(authorId);
     return {
       status: 200,
       payload: author,

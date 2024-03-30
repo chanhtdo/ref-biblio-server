@@ -27,9 +27,9 @@ export async function update(author: Author): Promise<void> {
   ]);
 }
 
-export async function get(authorIds: number[]): Promise<Author[]> {
-  const query = `SELECT * FROM udf_get_authors($1)`;
-  return pgPool.query(query, [authorIds]).then((res) => res.rows);
+export async function get(authorId: number): Promise<Author> {
+  const query = `SELECT * FROM udf_get_authors() WHERE "authorId" = $1`;
+  return pgPool.query(query, [authorId]).then((res) => res.rows[0]);
 }
 
 export async function remove(authorIds: number[]): Promise<void> {

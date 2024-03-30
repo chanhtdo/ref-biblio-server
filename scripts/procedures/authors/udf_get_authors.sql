@@ -1,7 +1,5 @@
 DROP FUNCTION IF EXISTS udf_get_authors;
-CREATE FUNCTION udf_get_authors(
-  p_author_ids INT[]
-)
+CREATE FUNCTION udf_get_authors()
 RETURNS TABLE(
   "authorId" INT,
   "firstName" TEXT,
@@ -28,10 +26,7 @@ BEGIN
     a.research_fields,
     a.created_date,
     a.last_updated
-  FROM authors a
-  WHERE a.author_id IN (
-    SELECT unnest(p_author_ids)
-  );
+  FROM authors a;
 
 END;
 $BODY$;
