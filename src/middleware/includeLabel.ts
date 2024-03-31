@@ -1,7 +1,7 @@
 import { NextFunction, Response, Request } from "express";
 import { labelService } from "services";
 import { ErrorType } from "ts/enums/errors";
-import { LogMessage } from "utils/logging";
+import { logMessage } from "utils/logging";
 
 export async function includeLabel(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
@@ -17,7 +17,7 @@ export async function includeLabel(req: Request, res: Response, next: NextFuncti
     });
     return;
   } catch (error) {
-    LogMessage(error.message, "middleware.includeLabel", error);
+    logMessage({ message: error.message, source: "middleware.includeLabel", details: error });
     res.status(500).json({
       timestamp: new Date(),
       type: ErrorType.UnexpectedServerError,

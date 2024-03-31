@@ -3,12 +3,13 @@ import * as config from "appSettings.json";
 import { pgLogging } from "database";
 import { LoggingType } from "ts/enums/logging";
 
-export function LogMessage(
-  message: string,
-  source: string,
-  details?: Record<string, unknown>,
-  type: LoggingType = LoggingType.Error,
-): void {
+export function logMessage(params: {
+  message: string;
+  source: string;
+  details?: Record<string, unknown>;
+  type?: LoggingType;
+}): void {
+  const { message, source, details, type = LoggingType.Error } = params;
   const dtFormat = config.dateTimeFormat as Intl.DateTimeFormatOptions;
   const msg = new Intl.DateTimeFormat("default", dtFormat).format(new Date());
   const logMsg =

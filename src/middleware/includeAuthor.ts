@@ -1,7 +1,7 @@
 import { NextFunction, Response, Request } from "express";
 import { authorService } from "services";
 import { ErrorType } from "ts/enums/errors";
-import { LogMessage } from "utils/logging";
+import { logMessage } from "utils/logging";
 
 export async function includeAuthor(
   req: Request,
@@ -21,7 +21,7 @@ export async function includeAuthor(
     });
     return;
   } catch (error) {
-    LogMessage(error.message, "middleware.includeAuthor", error);
+    logMessage({ message: error.message, source: "middleware.includeAuthor", details: error });
     res.status(500).json({
       timestamp: new Date(),
       type: ErrorType.UnexpectedServerError,

@@ -2,7 +2,7 @@ import { pgAuthors } from "database";
 import { Author } from "ts/types/authors";
 import { GenericResponse } from "ts/types/genericResponse";
 import { genericErrorResponse } from "utils/genericErrorResponse";
-import { LogMessage } from "utils/logging";
+import { logMessage } from "utils/logging";
 
 export async function add(author: Author): Promise<GenericResponse> {
   try {
@@ -16,7 +16,7 @@ export async function add(author: Author): Promise<GenericResponse> {
       },
     };
   } catch (error) {
-    LogMessage(error.message, "authorService.add", error);
+    logMessage({ message: error.message, source: "authorService.add", details: error });
     return genericErrorResponse(500, { details: error.message });
   }
 }
@@ -32,7 +32,7 @@ export async function modify(author: Author): Promise<GenericResponse> {
       },
     };
   } catch (error) {
-    LogMessage(error.message, "authorService.modify", error);
+    logMessage({ message: error.message, source: "authorService.modify", details: error });
     return genericErrorResponse(500, { details: error.message });
   }
 }
@@ -48,7 +48,7 @@ export async function remove(authorIds: number[]): Promise<GenericResponse> {
       },
     };
   } catch (error) {
-    LogMessage(error.message, "authorService.remove", error);
+    logMessage({ message: error.message, source: "authorService.remove", details: error });
     return genericErrorResponse(500, { details: error.message });
   }
 }
@@ -61,7 +61,7 @@ export async function get(authorId: number): Promise<GenericResponse> {
       payload: author,
     };
   } catch (error) {
-    LogMessage(error.message, "authorService.get", error);
+    logMessage({ message: error.message, source: "authorService.get", details: error });
     return genericErrorResponse(500, { details: error.message });
   }
 }
@@ -75,7 +75,7 @@ export async function list(search: string, limit: number, page: number): Promise
       payload: authors,
     };
   } catch (error) {
-    LogMessage(error.message, "authorService.get", error);
+    logMessage({ message: error.message, source: "authorService.list", details: error });
     return genericErrorResponse(500, { details: error.message });
   }
 }

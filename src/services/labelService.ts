@@ -2,7 +2,7 @@ import { pgLabels } from "database";
 import { ErrorType } from "ts/enums/errors";
 import { GenericResponse } from "ts/types/genericResponse";
 import { genericErrorResponse } from "utils/genericErrorResponse";
-import { LogMessage } from "utils/logging";
+import { logMessage } from "utils/logging";
 
 export async function add(label: string): Promise<GenericResponse> {
   try {
@@ -25,7 +25,7 @@ export async function add(label: string): Promise<GenericResponse> {
       },
     };
   } catch (error) {
-    LogMessage(error.message, "labelService.add", error);
+    logMessage({ message: error.message, source: "labelService.add", details: error });
     return genericErrorResponse(500, { details: error.message });
   }
 }
@@ -38,7 +38,7 @@ export async function get(value: string): Promise<GenericResponse> {
       payload: label,
     };
   } catch (error) {
-    LogMessage(error.message, "labelService.get", error);
+    logMessage({ message: error.message, source: "labelService.get", details: error });
     return genericErrorResponse(500, { details: error.message });
   }
 }
@@ -54,7 +54,7 @@ export async function remove(value: string): Promise<GenericResponse> {
       },
     };
   } catch (error) {
-    LogMessage(error.message, "labelService.remove", error);
+    logMessage({ message: error.message, source: "labelService.remove", details: error });
     return genericErrorResponse(500, { details: error.message });
   }
 }
