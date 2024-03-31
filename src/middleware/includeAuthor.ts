@@ -21,7 +21,7 @@ export async function includeAuthor(
     });
     return;
   } catch (error) {
-    LogMessage(error.message, "middleware.validateAuthorExists", error);
+    LogMessage(error.message, "middleware.includeAuthor", error);
     res.status(500).json({
       timestamp: new Date(),
       type: ErrorType.UnexpectedServerError,
