@@ -1,4 +1,3 @@
-import { pgAuthors } from "database";
 import { Router, Response, Request } from "express";
 import { validateBody } from "middleware/validate";
 import { authorService } from "services";
@@ -13,8 +12,14 @@ router.post("/api/v1/authors", validateBody, async (req: Request, res: Response)
 });
 
 router.get("/api/v1/authors", async (req: Request, res: Response) => {
-  //const {status, payload} = pgAuthors.get();
-  return res.status(200).send("payload");
+  const { query } = req;
+  const { status, payload } = await authorService.list(
+    query.search?.toString(),
+    Number(query.limit),
+    Number(query.page),
+  );
+
+  return res.status(status).send(payload);
 });
 
 module.exports = router;

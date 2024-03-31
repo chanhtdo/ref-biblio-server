@@ -65,3 +65,17 @@ export async function get(authorId: number): Promise<GenericResponse> {
     return genericErrorResponse(500, { details: error.message });
   }
 }
+
+export async function list(search: string, limit: number, page: number): Promise<GenericResponse> {
+  try {
+    const authors = await pgAuthors.list(search, limit, page);
+
+    return {
+      status: 200,
+      payload: authors,
+    };
+  } catch (error) {
+    LogMessage(error.message, "authorService.get", error);
+    return genericErrorResponse(500, { details: error.message });
+  }
+}
