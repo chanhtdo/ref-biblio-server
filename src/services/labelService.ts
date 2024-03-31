@@ -58,3 +58,16 @@ export async function remove(value: string): Promise<GenericResponse> {
     return genericErrorResponse(500, { details: error.message });
   }
 }
+
+export async function list(search: string, limit: number, page: number): Promise<GenericResponse> {
+  try {
+    const labels = await pgLabels.list(search, limit, page);
+    return {
+      status: 200,
+      payload: labels,
+    };
+  } catch (error) {
+    logMessage({ message: error.message, source: "labelService.list", details: error });
+    return genericErrorResponse(500, { details: error.message });
+  }
+}

@@ -1,5 +1,5 @@
 import { Router, Response, Request } from "express";
-import { validateBody } from "middleware/validate";
+import { validateBody, validateQuery } from "middleware/validate";
 import { authorService } from "services";
 
 const router = Router();
@@ -11,7 +11,7 @@ router.post("/api/v1/authors", validateBody, async (req: Request, res: Response)
   return res.status(status).send(payload);
 });
 
-router.get("/api/v1/authors", async (req: Request, res: Response) => {
+router.get("/api/v1/authors", validateQuery, async (req: Request, res: Response) => {
   const { query } = req;
   const { status, payload } = await authorService.list(
     query.search?.toString(),
