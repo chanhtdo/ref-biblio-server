@@ -4,6 +4,7 @@ import deleteAuthor from "./authors/deleteAuthor";
 import getAuthor from "./authors/getAuthor";
 import listAuthor from "./authors/listAuthor";
 import postLabel from "./labels/postLabel";
+import deleteLabel from "./labels/deleteLabel";
 
 module.exports = {
   "/api/v1/authors": { POST: { ...postAuthor }, GET: { ...listAuthor } },
@@ -13,4 +14,5 @@ module.exports = {
     GET: { ...getAuthor },
   },
   "/api/v1/labels": { POST: { ...postLabel } },
+  "/api/v1/labels/:value": { DELETE: { ...deleteLabel } },
 };

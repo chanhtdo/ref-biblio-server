@@ -29,3 +29,32 @@ export async function add(label: string): Promise<GenericResponse> {
     return genericErrorResponse(500, { details: error.message });
   }
 }
+
+export async function get(value: string): Promise<GenericResponse> {
+  try {
+    const label = await pgLabels.get(value);
+    return {
+      status: 200,
+      payload: label,
+    };
+  } catch (error) {
+    LogMessage(error.message, "labelService.get", error);
+    return genericErrorResponse(500, { details: error.message });
+  }
+}
+
+export async function remove(value: string): Promise<GenericResponse> {
+  try {
+    await pgLabels.remove(value);
+    return {
+      status: 200,
+      payload: {
+        timestamp: new Date(),
+        mesasage: `Label (${value}) deleted successfully.`,
+      },
+    };
+  } catch (error) {
+    LogMessage(error.message, "labelService.remove", error);
+    return genericErrorResponse(500, { details: error.message });
+  }
+}
