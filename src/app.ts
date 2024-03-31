@@ -3,6 +3,8 @@ import { port, timezone } from "appSettings.json";
 import cors from "cors";
 import morgan from "morgan";
 import Router from "routes";
+import { LogMessage } from "utils/logging";
+import { LoggingType } from "ts/enums/logging";
 
 const app: Express = express();
 app.use(express.json());
@@ -14,5 +16,10 @@ process.env.TZ = timezone;
 const envPort = process.env.PORT || port;
 
 app.listen(envPort, () => {
-  console.log(`[${timezone}] Ref-Biblio API server is ready at http://localhost:${envPort}`);
+  LogMessage(
+    `[${timezone}] Ref-Biblio API server is ready at http://localhost:${envPort}`,
+    "app.start",
+    undefined,
+    LoggingType.Event,
+  );
 });
