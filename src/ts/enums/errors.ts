@@ -6,6 +6,8 @@ export enum ErrorType {
   Forbidden = "Forbidden",
   GatewayTimeOut = "GatewayTimeOut",
   InternalServerError = "InternalServerError",
+  LabelAlreadyExists = "LabelAlreadyExists",
+  LabelNotFound = "LabelNotFound",
   NotFound = "NotFound",
   NotImplemented = "NotImplemented",
   ResourceLocked = "ResourceLocked",
