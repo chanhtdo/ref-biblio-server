@@ -4,7 +4,7 @@ import { GenericResponse } from "ts/types/genericResponse";
 import { genericErrorResponse } from "utils/genericErrorResponse";
 import { logMessage } from "utils/logging";
 
-export async function add(author: Author): Promise<GenericResponse> {
+export async function add(author: Partial<Author>): Promise<GenericResponse> {
   try {
     const { authorId, createdDate } = await pgAuthors.insert(author);
 

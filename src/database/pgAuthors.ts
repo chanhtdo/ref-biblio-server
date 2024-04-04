@@ -1,7 +1,9 @@
 import { pgPool } from "./pgPool";
 import { Author } from "ts/types/authors";
 
-export async function insert(author: Author): Promise<{ authorId: number; createdDate: Date }> {
+export async function insert(
+  author: Partial<Author>,
+): Promise<{ authorId: number; createdDate: Date }> {
   const query = `SELECT * FROM udf_insert_author($1, $2, $3, $4, $5, $6)`;
   return pgPool
     .query(query, [

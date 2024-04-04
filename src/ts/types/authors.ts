@@ -6,4 +6,6 @@ export type Author = {
   affiliations: string[];
   email: string;
   researchFields: string[];
+  createdDate: Date;
+  lastUpdated: Date;
 };
