@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS bibliographic_references (
   reference_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	title TEXT,
   description TEXT,
-  review TEXT,
+  scientific_journal TEXT,
   year INT,
   link TEXT,
   created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
